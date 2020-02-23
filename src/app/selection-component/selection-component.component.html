@@ -1,0 +1,50 @@
+<div class="bgd-main">
+  <div class="deloitte-logo">
+      <span><img src="../assets/images/deloitte_logo.svg" alt="Deloitte ." /></span>
+  </div>
+  <div class="flex-container">
+      <div class="bgd-1">
+      </div>
+      <div class="bgd-2">
+      </div>
+  </div>
+  <form [formGroup]="selectionForm">
+  <div class="login-form">
+      <div class="row logo">
+          <span><img src="../assets/images/Code_logo.png" alt="D-Code" /></span>
+      </div>
+      <div class="row">
+        <label class="lblDesign" for="cars">Choose Front-end language:</label>
+
+        <select id="frontend" class="form-control" formControlName = "frontend">
+          <option value="angular">Angular</option>
+          <option value="reactJS">ReactJS</option>
+          
+        </select>
+      </div>
+      <div class="row" >
+        <label class="lblDesign2" for="cars">Choose Back-end language:</label>
+
+        <select id="backend" class="form-control" formControlName = "backend"> 
+          <option value="angular">Java</option>
+          <option value="reactJS">Python</option>
+          
+        </select>
+      </div>
+      <div class="row">
+        <label class="lblDesign2" for="cars">Database:</label>
+
+        <select id="database" class="form-control" formControlName = "database">
+          <option value="angular">MongoDB</option>
+          <option value="reactJS">Cassandra</option>
+          
+        </select>
+      </div>
+      
+      <div class="row">
+          <button mat-button (click)="login()" >
+              Submit</button>
+      </div>
+  </div>
+   </form>
+</div>

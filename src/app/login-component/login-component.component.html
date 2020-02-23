@@ -1,0 +1,28 @@
+<div class="bgd-main">
+  <div class="deloitte-logo">
+      <span><img src="../assets/images/deloitte_logo.svg" alt="Deloitte ." /></span>
+  </div>
+  <div class="flex-container">
+      <div class="bgd-1">
+      </div>
+      <div class="bgd-2">
+      </div>
+  </div>
+  <form [formGroup]="loginForm">
+  <div class="login-form">
+      <div class="row logo">
+          <span><img src="../assets/images/Code_logo.png" alt="D-Code" /></span>
+      </div>
+      <div class="row">
+          <input type="text" class="form-control" formControlName = "userName" placeholder="User Name">
+      </div>
+      <div class="row">
+          <input type="password" class="form-control" formControlName = "password" placeholder="Enter your Password">
+      </div>
+      <div class="row">
+          <button mat-button (click)="login()" >
+              Sign In</button>
+      </div>
+  </div>
+   </form>
+</div>
