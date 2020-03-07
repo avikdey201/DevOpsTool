@@ -1,8 +1,8 @@
 .login-form {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
-    bottom: 50%;
+    bottom: 40%;
     right: 50%;
     min-width: 350px;
     min-height: 456px;
@@ -12,7 +12,7 @@
     z-index: 100;
 }
 
-.bgd-1 {    
+.bgd-1 {
     max-height: 100vh;
     z-index: 11;
     content: url(../../assets/images/Capture.png);
