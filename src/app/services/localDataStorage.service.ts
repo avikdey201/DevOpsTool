@@ -11,5 +11,9 @@ export class LocalDataStorageService {
         localStorage.setItem(key, data);
     }
 
+    clear() {
+        localStorage.clear();
+    }
+
 
 }

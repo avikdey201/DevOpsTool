@@ -1,6 +1,11 @@
 <div class="bgd-main">
   <div class="deloitte-logo">
-      <span><img src="../assets/images/deloitte_logo.svg" alt="Deloitte ." /></span>
+      <div><span><img src="../assets/images/deloitte_logo.svg" alt="Deloitte ." /></span></div>
+      <div class="menu"><div class="userName"> {{userName}}</div>
+      <div class="logout" (click)="logOut()">Logout <i class="material-icons">
+        exit_to_app
+        </i></div>
+      </div>
   </div>
   <div class="flex-container">
       <div class="bgd-1">

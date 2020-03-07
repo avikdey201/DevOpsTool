@@ -105,22 +105,28 @@ div.row {
   margin-top: 30px;
     margin-bottom: 10px;
     color: #175639;
+    font-weight: bold;
 }
 
 .lblDesign2{
   margin-top: 5px;
   margin-bottom: 10px;
   color: #175639;
+  font-weight: bold;
 }
 
-input {
+.form-control {
     background: transparent;
     color: #259e66;
     text-align: center;
     border: aliceblue;
     border-color: #66afe9;
     outline: 0;
-    box-shadow: inset 0 1px 1px  rgba(69, 149, 67, 0.6), 0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 3px 1px  rgba(69, 149, 67, 0.6), 0 0 8px rgba(102,175,233,.6);
+}
+
+.form-control:focus {
+  box-shadow: inset 0 3px 1px  rgba(23, 130, 156, 0.6), 0 0 8px rgba(102,175,233,.6);
 }
 
 button {
@@ -138,11 +144,48 @@ button:hover, button:focus{
 .deloitte-logo{
   background: transparent;
   display: flex;
+  justify-content: space-between;
   width: 100%;
   height: 50px;
-  background-color: #1c1e1e;
+  background-color: #000;
+}
+.menu{
+  display: flex;
+  margin-right: 50px;
+}
+.userName {
+  display: flex;
+  margin-right: 30px;
+  align-items: center;
+  align-self: center;
+  color: white;
+  font-size: larger;
+  font-weight: bold;
 }
 
+.userName:hover {
+  color: #89be5fdb;
+}
+
+.logout{
+  display: flex;
+  margin-right: 20px;
+  color: white;
+  align-items: center;
+  align-self: center;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.logout i {
+  margin-left: 5px;
+
+}
+
+.logout:hover{
+  color: #89be5fdb;
+  
+}
 .deloitte-logo span {
   position: absolute;
   left: 10px;

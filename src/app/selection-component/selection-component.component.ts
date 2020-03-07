@@ -7,6 +7,8 @@ import { DataProviderService } from '../data-provider.service';
 import { DescriptionResponseModel } from 'src/data-model/DescriptionResponse.model';
 import { DialogData } from '../../data-model/dailogData.model';
 import { DialogService } from '../services/dialog.service';
+import { LocalDataStorageService } from '../services/localDataStorage.service';
+import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 
 @Component({
   selector: 'app-selection-component',
@@ -15,32 +17,33 @@ import { DialogService } from '../services/dialog.service';
 })
 export class SelectionComponentComponent implements OnInit {
 
- 
+  userName: string;
   selectionForm: FormGroup;
   selectionReqData: DescriptionRequestModel;
   descRes: DescriptionResponseModel;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
-     private dialogService: DialogService
-    // private codeEvalutionService: CodeEvalutionService
+     private dialogService: DialogService,
+     private localDataStore: LocalDataStorageService
     ) { }
 
   ngOnInit() {
+    this.userName = this.localDataStore.getLocalDataStorage('userName');
     this.selectionForm = this.fb.group({
       frontend: [null, Validators.required],
       backend: [null, Validators.required],
       database: [null, Validators.required]
     });
   }
-    submitData() : void {
+  submitData(): void {
    this.selectionReqData.frontEnd = this.selectionForm.controls.frontend.value;
    this.selectionReqData.backEnd = this.selectionForm.controls.backEnd.value;
    this.selectionReqData.db = this.selectionForm.controls.database.value;
    this.dataProviderService.getDescriptionStatus(this.selectionReqData).subscribe(
     (data: DescriptionResponseModel) => {
        this.descRes = data;
-       console.log("Token received from backend",this.descRes.status);   
+       console.log('Token received from backend',this.descRes.status);
        if (!data.status &&
         data.status === 'Success') {
         const dialogData: DialogData = {dialogType: 'Error',
@@ -48,9 +51,14 @@ export class SelectionComponentComponent implements OnInit {
          dialogButtonTexts: ['Close']
         };
         this.dialogService.openDialog(dialogData);
-   } 
+   }
     });
 
+    }
+
+    logOut() {
+      this.localDataStore.clear();
+      this.router.navigateByUrl('/');
     }
   }
 

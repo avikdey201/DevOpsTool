@@ -38,8 +38,10 @@ export class LoginComponentComponent implements OnInit {
     this.dataProviderService.getLoginData(this.loginReqData).subscribe(
       (data: LoginResponseModel) => {
          this.loginRes = data;
-         console.log("Token received from backend",this.loginRes.token);
+         console.log('Token received from backend', this.loginRes.token);
          this.localDataStore.putLocalDataStorage(this.loginRes, 'userDetails');
+         this.localDataStore.putLocalDataStorage(this.loginRes.token, 'token');
+         this.localDataStore.putLocalDataStorage(this.loginRes.userName, 'userName');
         this.router.navigate(['/select']);
   });
 }
