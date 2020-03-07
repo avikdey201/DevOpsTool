@@ -39,3 +39,6 @@ div.btn-group.show div.dropdown-menu.show:focus {
 .bootstrap-select.btn-group .dropdown-menu li a:hover {
   background-color: transparent!important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
