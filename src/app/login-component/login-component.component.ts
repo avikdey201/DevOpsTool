@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequestModel } from '../../data-model/LoginRequestModel';
 import { DataProviderService } from '../data-provider.service';
 import { LoginResponseModel } from '../../data-model/LoginResponseModel';
+import { LocalDataStorageService } from '../services/localDataStorage.service';
 @Component({
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
@@ -16,10 +17,14 @@ export class LoginComponentComponent implements OnInit {
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
-    // private codeEvalutionService: CodeEvalutionService
+     private localDataStore: LocalDataStorageService
     ) { }
     loginRes: LoginResponseModel = new LoginResponseModel();
   ngOnInit() {
+
+    if (this.localDataStore.getLocalDataStorage('userDetails')) {
+      this.router.navigate(['/select']);
+    }
     this.loginForm = this.fb.group({
       userName: [null, Validators.required],
       password: [null, Validators.required]
@@ -27,19 +32,15 @@ export class LoginComponentComponent implements OnInit {
   }
 
   login(): void {
-    //const loginData = { 'userName': this.loginForm.controls.userName.value, 'password': this.loginForm.controls.password.value }
-    this.loginReqData = new LoginRequestModel();
+   this.loginReqData = new LoginRequestModel();
     this.loginReqData.userName = this.loginForm.controls.userName.value;
     this.loginReqData.password = this.loginForm.controls.password.value;
     this.dataProviderService.getLoginData(this.loginReqData).subscribe(
       (data: LoginResponseModel) => {
          this.loginRes = data;
-         console.log("Token received from backend",this.loginRes.token);    
-      });
-        
-        this.router.navigate(['/description']);
-     
-
-  }
-
+         console.log("Token received from backend",this.loginRes.token);
+         this.localDataStore.putLocalDataStorage(this.loginRes, 'userDetails');
+        this.router.navigate(['/select']);
+  });
+}
 }

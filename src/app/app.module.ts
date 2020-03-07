@@ -10,6 +10,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DcodeDialogComponent } from './reusable-component/dcode-dialog/dcode-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogService } from './services/dialog.service';
+import { LocalDataStorageService } from './services/localDataStorage.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +29,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     NoopAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [DialogService, LocalDataStorageService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

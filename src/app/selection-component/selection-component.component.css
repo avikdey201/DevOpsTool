@@ -65,13 +65,11 @@
 .bgd-1 {    
     max-height: 100vh;
     z-index: 11;
-    content: url(../../assets/images/Capture.png);
 }
 
 .bgd-2 {
     max-height: 100vh;
     z-index: 11;
-    content: url(../../assets/images/Capture2.png);
 }
 
 
@@ -84,7 +82,7 @@
 }
 
 .bgd-main {
-    background-color: #1b1a1ae8;
+    background-color:white;
 }
 
 img {
@@ -106,13 +104,13 @@ div.row {
 .lblDesign{
   margin-top: 30px;
     margin-bottom: 10px;
-    color: #259e66;
+    color: #175639;
 }
 
 .lblDesign2{
   margin-top: 5px;
   margin-bottom: 10px;
-  color: #259e66;
+  color: #175639;
 }
 
 input {
@@ -138,10 +136,17 @@ button:hover, button:focus{
 }
 
 .deloitte-logo{
-    position: absolute;
-    top: 25px;
-    left: 40px;
-    background: transparent;
+  background: transparent;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: #1c1e1e;
+}
+
+.deloitte-logo span {
+  position: absolute;
+  left: 10px;
+  top: 6px;
 }
 
 div.deloitte-logo img {
