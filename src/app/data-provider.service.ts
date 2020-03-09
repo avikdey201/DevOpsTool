@@ -20,7 +20,14 @@ export class DataProviderService {
     //return this.http.post(this.executeCode_enpoint, executionObj);
     return this.http.get<LoginResponseModel>(loginData);
   }
-  
+
+  public getLoginDataWithDetails(LoginObj: LoginRequestModel): Observable<any> {
+    //console.log(this.executeCode_enpoint);
+    const loginData = '../assets/Mock-Data/LoginWithDataResponse.json';
+    //return this.http.post(this.executeCode_enpoint, executionObj);
+    return this.http.get<LoginResponseModel>(loginData);
+  }
+
 
   public getDescriptionStatus(DescriptionObj: DescriptionRequestModel): Observable<any> {
     //console.log(this.executeCode_enpoint);

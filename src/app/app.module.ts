@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { DialogService } from './services/dialog.service';
 import { LocalDataStorageService } from './services/localDataStorage.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { LoginDataStorageService } from './services/loginDataStorage.service';
+import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { AuthGuard } from './services/auth-guard.service';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [DialogService, LocalDataStorageService, AuthGuard],
+  providers: [DialogService, LocalDataStorageService, AuthGuard, LoginDataStorageService, LoginResponseModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

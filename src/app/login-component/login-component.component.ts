@@ -5,6 +5,7 @@ import { LoginRequestModel } from '../../data-model/LoginRequestModel';
 import { DataProviderService } from '../data-provider.service';
 import { LoginResponseModel } from '../../data-model/LoginResponseModel';
 import { LocalDataStorageService } from '../services/localDataStorage.service';
+import { LoginDataStorageService } from '../services/loginDataStorage.service';
 @Component({
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
@@ -14,16 +15,25 @@ export class LoginComponentComponent implements OnInit {
 
   loginForm: FormGroup;
   loginReqData: LoginRequestModel;
+  isClicked: boolean;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
-     private localDataStore: LocalDataStorageService
+     private localDataStore: LocalDataStorageService,
+     private loginDataStore: LoginDataStorageService
     ) { }
     loginRes: LoginResponseModel = new LoginResponseModel();
   ngOnInit() {
 
     if (this.localDataStore.getLocalDataStorage('userDetails')) {
-      this.router.navigate(['/select']);
+      this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
+        (data: LoginResponseModel) => {
+           this.loginRes = data;
+           this.loginDataStore.putLoginDataStorage(this.loginRes);
+           console.log('Token received from backend', this.loginRes.token);
+           this.router.navigate(['/select']);
+        });
+      
     }
     this.loginForm = this.fb.group({
       userName: [null, Validators.required],
@@ -43,6 +53,7 @@ export class LoginComponentComponent implements OnInit {
          this.localDataStore.putLocalDataStorage(this.loginRes.token, 'token');
          this.localDataStore.putLocalDataStorage(this.loginRes.userName, 'userName');
         this.router.navigate(['/select']);
+        this.isClicked=true;
   });
 }
 }

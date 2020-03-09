@@ -1,0 +1,14 @@
+{
+    "token": "xyz123",
+    "username": "saurabh",
+    "frontend":"Angular",
+    "backend":"Java",
+    "db":"MongoDB",
+     "repository": {
+      "url":"http://rajkirancs/devopstool",
+      "userName":"saurabh",
+      "password":"qwerty3"
+    },
+   "submit": "true"
+ }
+ 
