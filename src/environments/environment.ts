@@ -8,7 +8,8 @@ export const environment = {
     local_dev: 'http://localhost:12001'
   },
   api_endpoints: {
-     getUserDetails: '/devops/authentication'
+     getUserDetails: '/devops/authentication',
+     postUserDetails: '/devops/save'
    
   }
 };

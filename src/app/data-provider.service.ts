@@ -13,6 +13,7 @@ export class DataProviderService {
 
   constructor(private http: HttpClient) { }
   login_endpoint = environment.baseUrls.local_dev + environment.api_endpoints.getUserDetails;
+  save_endpoint =  environment.baseUrls.local_dev + environment.api_endpoints.postUserDetails;
   
 
   public getLoginData(loginObj: LoginRequestModel): Observable<any> {
@@ -30,11 +31,11 @@ export class DataProviderService {
   }
 
 
-  public getDescriptionStatus(DescriptionObj: DescriptionRequestModel): Observable<any> {
-    //console.log(this.executeCode_enpoint);
-    const descriptionData = '../assets/Mock-Data/DescriptionResponse.json';
-    //return this.http.post(this.executeCode_enpoint, executionObj);
-    return this.http.get<LoginResponseModel>(descriptionData);  
+  public getDescriptionStatus(descriptionObj: DescriptionRequestModel): Observable<any> {
+    console.log(this.save_endpoint);
+    //const descriptionData = '../assets/Mock-Data/DescriptionResponse.json';
+    return this.http.post(this.save_endpoint, descriptionObj);
+    //return this.http.get<LoginResponseModel>(descriptionData);  
   }
 
 //   public postSubmitData(submitResponse: SubmitResponse): Observable<any> {

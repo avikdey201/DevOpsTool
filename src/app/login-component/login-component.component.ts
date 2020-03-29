@@ -52,6 +52,8 @@ export class LoginComponentComponent implements OnInit {
          console.log('Token received from backend', this.loginRes.userId);
          this.localDataStore.putLocalDataStorage(this.loginRes, 'userDetails');
          this.localDataStore.putLocalDataStorage(this.loginRes.userId, 'token');
+         this.localDataStore.putLocalDataStorage(this.loginRes.userDetailId, 'userDetailId');
+         this.localDataStore.putLocalDataStorage(this.loginRes.userId, 'userId');
          this.localDataStore.putLocalDataStorage(this.loginRes.userName, 'userName');
          if(this.loginRes.frontend !== null){
          this.localDataStore.putLocalDataStorage(this.loginRes.frontend, 'frontend');

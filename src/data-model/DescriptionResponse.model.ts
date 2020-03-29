@@ -1,5 +1,5 @@
 export class DescriptionResponseModel{
-    public status: string;
-    public code: number;
+    public status: number;
+    public message: string;
     
    }

@@ -1,6 +1,9 @@
 export class DescriptionRequestModel{
-    public token: string;
-    public frontEnd: string;
-    public backEnd: string;
-    public db: string;
+    public userId: string;
+    public userDetailId: number;
+    public frontEndLanguage: string;
+    public backendLanguage: string;
+    public database: string;
    }
+
+   

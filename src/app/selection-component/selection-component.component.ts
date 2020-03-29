@@ -70,7 +70,7 @@ export class SelectionComponentComponent implements OnInit {
             this.repoPassword = this.localDataStore.getLocalDataStorage('repository-password');
             this.repoUrl = this.localDataStore.getLocalDataStorage('repository-url');
            }
-          if(this.localDataStore.getLocalDataStorage('submit')){
+          if(this.localDataStore.getLocalDataStorage('submit') !== "null"){
             this.disableSubmitBtn = true;
           }
         
@@ -83,21 +83,23 @@ export class SelectionComponentComponent implements OnInit {
   }
 
   submitData(): void {
-   this.selectionReqData.frontEnd = this.selectionForm.controls.frontend.value;
-   this.selectionReqData.backEnd = this.selectionForm.controls.backend.value;
-   this.selectionReqData.db = this.selectionForm.controls.database.value;
+    this.selectionReqData.userId=this.localDataStore.getLocalDataStorage('userId'); 
+    this.selectionReqData.userDetailId=this.localDataStore.getLocalDataStorage('userDetailId'); 
+   this.selectionReqData.frontEndLanguage = this.selectionForm.controls.frontend.value;
+   this.selectionReqData.backendLanguage = this.selectionForm.controls.backend.value;
+   this.selectionReqData.database = this.selectionForm.controls.database.value;
    this.dataProviderService.getDescriptionStatus(this.selectionReqData).subscribe(
     (data: DescriptionResponseModel) => {
        this.descRes = data;
-       console.log('Token received from backend',this.descRes.status);
-       if (!data.status &&
-        data.status === 'Success') {
-        const dialogData: DialogData = {dialogType: 'Error',
-         dialogTitle: 'Success', dialogContent: 'Proper Data Submitted',
-         dialogButtonTexts: ['Close']
-        };
-        this.dialogService.openDialog(dialogData);
-   }
+       console.log('Service Returned', this.descRes.message);
+  //      if (!data.status &&
+  //       data.status === 'Success') {
+  //       const dialogData: DialogData = {dialogType: 'Error',
+  //        dialogTitle: 'Success', dialogContent: 'Proper Data Submitted',
+  //        dialogButtonTexts: ['Close']
+  //       };
+  //       this.dialogService.openDialog(dialogData);
+  //  }
     });
 
     }
