@@ -26,6 +26,9 @@ export class SelectionComponentComponent implements OnInit {
   selectionReqData: DescriptionRequestModel = new DescriptionRequestModel();
   descRes: DescriptionResponseModel;
   disableSubmitBtn: boolean;
+  repoUserName: string;
+  repoPassword: string;
+  repoUrl: string;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
@@ -41,28 +44,37 @@ export class SelectionComponentComponent implements OnInit {
       database: [null, Validators.required]
        });
     this.userName = this.localDataStore.getLocalDataStorage('userName');
-    this.loginData = this.loginDataStore.getLoginDataStorage();
+    
+    //this.loginData = this.loginDataStore.getLoginDataStorage();
     if (this.localDataStore.getLocalDataStorage('userName')) {
-      this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
-        (data: LoginResponseModel) => {
-           this.loginData = data;
-           if(this.loginData.frontend !== null){
+      // this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
+      //   (data: LoginResponseModel) => {
+      //      this.loginData = data;
+           if(this.localDataStore.getLocalDataStorage('frontend') !== null){
             console.log("Selected User is:",this.loginData.userName);
-            this.selectionForm.controls.frontend.setValue(this.loginData.frontend);
+            this.loginData.userName = this.localDataStore.getLocalDataStorage('userName');
+            if(this.localDataStore.getLocalDataStorage('frontend')){
+            this.selectionForm.controls.frontend.setValue(this.localDataStore.getLocalDataStorage('frontend'));
             this.selectionForm.controls.frontend.disable();
-            this.selectionForm.controls.backend.setValue(this.loginData.backend);
+            }
+            if(this.localDataStore.getLocalDataStorage('backend')){
+            this.selectionForm.controls.backend.setValue(this.localDataStore.getLocalDataStorage('backend'));
             this.selectionForm.controls.backend.disable();
-            this.selectionForm.controls.database.setValue(this.loginData.db);
+            }
+            if(this.localDataStore.getLocalDataStorage('db')){
+            this.selectionForm.controls.database.setValue(this.localDataStore.getLocalDataStorage('db'));
             this.selectionForm.controls.database.disable();
-            this.loginData.repository.userName
-            this.loginData.repository.password
-            this.loginData.repository.url
-          }
-          if(this.loginData.submit){
+            }
+            console.log("Repo details",this.localDataStore.getLocalDataStorage('repository-url'));
+            this.repoUserName = this.localDataStore.getLocalDataStorage('repository-userName');
+            this.repoPassword = this.localDataStore.getLocalDataStorage('repository-password');
+            this.repoUrl = this.localDataStore.getLocalDataStorage('repository-url');
+           }
+          if(this.localDataStore.getLocalDataStorage('submit')){
             this.disableSubmitBtn = true;
           }
-
-        });
+        
+        //});
        
       }
     

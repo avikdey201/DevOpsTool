@@ -1,18 +1,18 @@
 import {DbModel} from '../data-model/DbModel';
 export class LoginResponseModel{
-   public token: string;
+   public userId: string;
    public userName: string;
    public repository: RepoDetails;
    public frontend: string;
-   public backend :string;
+   public service :string;
    public db : string;
-   public submit : boolean;
+   public status : boolean;
 
 }
-
 export class RepoDetails{
-   public userName: string;
+   public frontEndUrl: string;
+   public serviceEndUrl: string;
+   public username: string;
    public password: string;
-   public url: string;
-
+   
 }

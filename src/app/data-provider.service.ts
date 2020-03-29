@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginRequestModel } from 'src/data-model/LoginRequestModel';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { DescriptionRequestModel } from 'src/data-model/DescriptionRequest.model';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +12,21 @@ import { DescriptionRequestModel } from 'src/data-model/DescriptionRequest.model
 export class DataProviderService {
 
   constructor(private http: HttpClient) { }
-  
+  login_endpoint = environment.baseUrls.local_dev + environment.api_endpoints.getUserDetails;
   
 
-  public getLoginData(LoginObj: LoginRequestModel): Observable<any> {
-    //console.log(this.executeCode_enpoint);
+  public getLoginData(loginObj: LoginRequestModel): Observable<any> {
+    //console.log(this.login_endpoint);
     const loginData = '../assets/Mock-Data/LoginResponse.json';
-    //return this.http.post(this.executeCode_enpoint, executionObj);
+    //return this.http.post(this.login_endpoint, loginObj);
     return this.http.get<LoginResponseModel>(loginData);
   }
 
-  public getLoginDataWithDetails(LoginObj: LoginRequestModel): Observable<any> {
-    //console.log(this.executeCode_enpoint);
-    const loginData = '../assets/Mock-Data/LoginWithDataResponse.json';
-    //return this.http.post(this.executeCode_enpoint, executionObj);
-    return this.http.get<LoginResponseModel>(loginData);
+  public getLoginDataWithDetails(loginObj: LoginRequestModel): Observable<any> {
+    console.log(this.login_endpoint);
+    //const loginData = '../assets/Mock-Data/LoginWithDataResponse.json';
+    return this.http.post(this.login_endpoint, loginObj);
+    //return this.http.get<LoginResponseModel>(loginData);
   }
 
 
