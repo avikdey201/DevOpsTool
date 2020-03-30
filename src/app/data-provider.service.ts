@@ -5,6 +5,7 @@ import { LoginRequestModel } from 'src/data-model/LoginRequestModel';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { DescriptionRequestModel } from 'src/data-model/DescriptionRequest.model';
 import { environment } from '../environments/environment';
+import { DescriptionResponseModel } from 'src/data-model/DescriptionResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class DataProviderService {
   constructor(private http: HttpClient) { }
   login_endpoint = environment.baseUrls.local_dev + environment.api_endpoints.getUserDetails;
   save_endpoint =  environment.baseUrls.local_dev + environment.api_endpoints.postUserDetails;
+  submit_endpoint = environment.baseUrls.local_dev + environment.api_endpoints.submitRepoDetails;
+
+
   
 
   public getLoginData(loginObj: LoginRequestModel): Observable<any> {
@@ -36,6 +40,14 @@ export class DataProviderService {
     //const descriptionData = '../assets/Mock-Data/DescriptionResponse.json';
     return this.http.post(this.save_endpoint, descriptionObj);
     //return this.http.get<LoginResponseModel>(descriptionData);  
+  }
+
+  public submitDetails(id: number): Observable<DescriptionResponseModel> {
+    const url = this.submit_endpoint +'/'+ id ;
+    console.log(url);
+    //const descriptionData = '../assets/Mock-Data/DescriptionResponse.json';
+   // return this.http.post(this.save_endpoint, descriptionObj);
+    return this.http.get<DescriptionResponseModel>(url);  
   }
 
 //   public postSubmitData(submitResponse: SubmitResponse): Observable<any> {

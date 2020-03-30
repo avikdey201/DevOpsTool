@@ -10,6 +10,7 @@ import { LocalDataStorageService } from '../services/localDataStorage.service';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { LoginDataStorageService } from '../services/loginDataStorage.service';
 import { LoginRequestModel } from 'src/data-model/LoginRequestModel';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -22,13 +23,17 @@ export class SelectionComponentComponent implements OnInit {
   loginData: LoginResponseModel = new LoginResponseModel() ;
   loginReqData: LoginRequestModel;
   userName: string;
+  id: number;
   selectionForm: FormGroup;
   selectionReqData: DescriptionRequestModel = new DescriptionRequestModel();
   descRes: DescriptionResponseModel;
+  submitRes: DescriptionResponseModel;
   disableSubmitBtn: boolean;
   repoUserName: string;
   repoPassword: string;
-  repoUrl: string;
+  repoFrontEndUrl: string;
+  repoBackEndUrl: string;
+  submitSubscription: Subscription;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
@@ -68,7 +73,8 @@ export class SelectionComponentComponent implements OnInit {
             console.log("Repo details",this.localDataStore.getLocalDataStorage('repository-url'));
             this.repoUserName = this.localDataStore.getLocalDataStorage('repository-userName');
             this.repoPassword = this.localDataStore.getLocalDataStorage('repository-password');
-            this.repoUrl = this.localDataStore.getLocalDataStorage('repository-url');
+            this.repoFrontEndUrl = this.localDataStore.getLocalDataStorage('frontEnd-url');
+            this.repoBackEndUrl = this.localDataStore.getLocalDataStorage('serviceEnd-url');
            }
           if(this.localDataStore.getLocalDataStorage('submit') !== "null"){
             this.disableSubmitBtn = true;
@@ -82,7 +88,7 @@ export class SelectionComponentComponent implements OnInit {
   
   }
 
-  submitData(): void {
+  saveData(): void {
     this.selectionReqData.userId=this.localDataStore.getLocalDataStorage('userId'); 
     this.selectionReqData.userDetailId=this.localDataStore.getLocalDataStorage('userDetailId'); 
    this.selectionReqData.frontEndLanguage = this.selectionForm.controls.frontend.value;
@@ -92,8 +98,7 @@ export class SelectionComponentComponent implements OnInit {
     (data: DescriptionResponseModel) => {
        this.descRes = data;
        console.log('Service Returned', this.descRes.message);
-  //      if (!data.status &&
-  //       data.status === 'Success') {
+  //      if (this.descRes.message === 'Data stored properly') {
   //       const dialogData: DialogData = {dialogType: 'Error',
   //        dialogTitle: 'Success', dialogContent: 'Proper Data Submitted',
   //        dialogButtonTexts: ['Close']
@@ -103,6 +108,18 @@ export class SelectionComponentComponent implements OnInit {
     });
 
     }
+
+    submitData(): void {
+      this.id=this.localDataStore.getLocalDataStorage('userDetailId');
+      this.submitSubscription = this.dataProviderService.submitDetails(this.id).subscribe(
+        (data: DescriptionResponseModel) => {
+           this.submitRes = data;
+           console.log('Submit Service returned',this.submitRes.message);  
+        }
+      );
+
+    }
+
 
     logOut() {
       this.localDataStore.clear();

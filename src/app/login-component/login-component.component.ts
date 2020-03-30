@@ -67,7 +67,8 @@ export class LoginComponentComponent implements OnInit {
          if(this.loginRes.repository !== null){
           this.localDataStore.putLocalDataStorage(this.loginRes.repository.username, 'repository-userName');
           this.localDataStore.putLocalDataStorage(this.loginRes.repository.password, 'repository-password');
-          this.localDataStore.putLocalDataStorage(this.loginRes.repository.frontEndUrl, 'repository-url');
+          this.localDataStore.putLocalDataStorage(this.loginRes.repository.frontEndUrl, 'frontEnd-url');
+          this.localDataStore.putLocalDataStorage(this.loginRes.repository.serviceEndUrl, 'serviceEnd-url');
          }
          this.localDataStore.putLocalDataStorage(this.loginRes.status, 'submit');
         this.router.navigate(['/select']);

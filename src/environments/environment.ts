@@ -9,7 +9,8 @@ export const environment = {
   },
   api_endpoints: {
      getUserDetails: '/devops/authentication',
-     postUserDetails: '/devops/save'
+     postUserDetails: '/devops/save',
+     submitRepoDetails: '/devops/submit'
    
   }
 };

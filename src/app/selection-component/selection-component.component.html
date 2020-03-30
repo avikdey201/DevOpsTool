@@ -44,14 +44,13 @@
       </div>
 
       <div class="row">
-          <button mat-button  [disabled]=disableSubmitBtn (click)="submitData()" >
+          <button mat-button  [disabled]=disableSubmitBtn (click)="saveData()" >
               Submit</button>
       </div>
       <div *ngIf="disableSubmitBtn" class="data">
         <label class="lblDesign1" for="cars">Repository Details:</label>
-        <br><label class="lblDesign1" for="cars">UserName: {{repoUserName}}</label>
-        <br><label class="lblDesign1" for="cars">Password: {{repoPassword}}</label>
-        <br><label class="lblDesign1" for="cars">Url: {{repoUrl}}</label>
+        <br><label class="lblDesign1" for="cars">FrontEndUrl: {{repoFrontEndUrl}}</label>
+        <br><label class="lblDesign1" for="cars">ServiceEndUrl: {{repoBackEndUrl}}</label>
         <button class="finalBtn" mat-button (click)="submitData()" >
          Final Submit</button>
       </div>
