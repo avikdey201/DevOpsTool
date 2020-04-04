@@ -9,13 +9,14 @@ export class DialogService {
 
   public openDialog(dialogData: DialogData): void {
     const dialogRef = this.dialog.open(DcodeDialogComponent, {
-      width: '600px',
-      maxWidth: '600px',
-      height: '350px',
-      maxHeight: '350px',
+      width: '400px',
+      maxWidth: '400px',
+      height: '200px',
+      maxHeight: '200px',
       data: dialogData,
       hasBackdrop: true,
       disableClose: true
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {

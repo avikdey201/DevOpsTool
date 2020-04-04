@@ -1,7 +1,8 @@
 <h1 mat-dialog-title cdkFocusInitial>{{data.dialogTitle}}
-  <mat-icon *ngIf="data.dialogType === 'Error' " style="margin-left: 20px; vertical-align: middle;color: #79e4cb;"> error </mat-icon>
+  <mat-icon *ngIf="data['dialogType']==='Success'"  style="margin-left: 20px; vertical-align: middle;color: #79e4cb;"> thumb_up </mat-icon>
+  <mat-icon *ngIf="data['dialogType']==='Error'"  style="margin-left: 20px; vertical-align: middle;color: #79e4cb;"> error </mat-icon>
   </h1>
-  <div mat-dialog-content style="max-height: 200px; min-height: 200px;">
+  <div mat-dialog-content >
     <p> {{data.dialogContent}}</p>
   </div>
   <div mat-dialog-actions>

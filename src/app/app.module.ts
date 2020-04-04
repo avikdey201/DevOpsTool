@@ -9,7 +9,7 @@ import { SelectionComponentComponent } from './selection-component/selection-com
 import {HttpClientModule} from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DcodeDialogComponent } from './reusable-component/dcode-dialog/dcode-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogService } from './services/dialog.service';
@@ -35,6 +35,7 @@ import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
     MatButtonModule,
     MatIconModule
   ],
+  entryComponents: [DcodeDialogComponent],
   providers: [DialogService, LocalDataStorageService, AuthGuard, LoginDataStorageService, LoginResponseModel],
   bootstrap: [AppComponent]
 })

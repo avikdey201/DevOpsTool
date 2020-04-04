@@ -98,13 +98,13 @@ export class SelectionComponentComponent implements OnInit {
     (data: DescriptionResponseModel) => {
        this.descRes = data;
        console.log('Service Returned', this.descRes.message);
-  //      if (this.descRes.message === 'Data stored properly') {
-  //       const dialogData: DialogData = {dialogType: 'Error',
-  //        dialogTitle: 'Success', dialogContent: 'Proper Data Submitted',
-  //        dialogButtonTexts: ['Close']
-  //       };
-  //       this.dialogService.openDialog(dialogData);
-  //  }
+       if (this.descRes.message === 'Data stored properly') {
+        const dialogData: DialogData = {dialogType: 'Success',
+         dialogTitle: 'Success', dialogContent: 'Proper Data Submitted',
+         dialogButtonTexts: ['Close']
+        };
+        this.dialogService.openDialog(dialogData);
+   }
     });
 
     }

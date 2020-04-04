@@ -3,5 +3,6 @@ export interface DialogData {
     dialogTitle: string;
     dialogContent: string;
     dialogButtonTexts: string[];
+    
   }
   
