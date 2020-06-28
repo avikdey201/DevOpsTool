@@ -89,7 +89,7 @@ img {
     width: 300px;
 }
 
-div.row {
+div.row1 {
     margin-top: 20px;
     margin-bottom: 20px;
     text-decoration-color: #259e66;
@@ -97,17 +97,8 @@ div.row {
 }
 
 div.data {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  bottom: 50%;
-  right: 50%;
-  min-width: 350px;
-  min-height: 456px;
-  transform: translate(-50%, -50%);
-  border-radius: 1%;
-  background: transparent;
-  z-index: 100;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-decoration-color: #259e66;  
 }
 
