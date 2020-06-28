@@ -114,7 +114,14 @@ export class SelectionComponentComponent implements OnInit {
       this.submitSubscription = this.dataProviderService.submitDetails(this.id).subscribe(
         (data: DescriptionResponseModel) => {
            this.submitRes = data;
-           console.log('Submit Service returned',this.submitRes.message);  
+           console.log('Submit Service returned',this.submitRes.message); 
+           if (this.submitRes.message === 'Data submitted properly') {
+            const dialogData: DialogData = {dialogType: 'Success',
+             dialogTitle: 'Success', dialogContent: 'Data submitted properly',
+             dialogButtonTexts: ['Close']
+            };
+            this.dialogService.openDialog(dialogData);
+       } 
         }
       );
 
