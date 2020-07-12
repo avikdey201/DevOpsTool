@@ -41,7 +41,7 @@ export class SelectionComponentComponent implements OnInit {
      private localDataStore: LocalDataStorageService,
      private loginDataStore: LoginDataStorageService
     ) { }
-
+    loginRes: LoginResponseModel = new LoginResponseModel();
   ngOnInit() {
     this.selectionForm = this.fb.group({
       frontend: [null, Validators.required],
@@ -107,6 +107,35 @@ export class SelectionComponentComponent implements OnInit {
    }
     });
 
+    this.loginReqData = new LoginRequestModel();
+    this.loginReqData.userId = this.localDataStore.getLocalDataStorage('userId'); 
+    this.loginReqData.password = this.localDataStore.getLocalDataStorage('password'); 
+    this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
+      (data: LoginResponseModel) => {
+        this.loginRes = data;
+        console.log('Token received from backend', this.loginRes.userId);
+        this.localDataStore.putLocalDataStorage(this.loginRes, 'userDetails');
+        this.localDataStore.putLocalDataStorage(this.loginRes.userId, 'token');
+        this.localDataStore.putLocalDataStorage(this.loginRes.userDetailId, 'userDetailId');
+        this.localDataStore.putLocalDataStorage(this.loginRes.userId, 'userId');
+        this.localDataStore.putLocalDataStorage(this.loginRes.userName, 'userName');
+        this.localDataStore.putLocalDataStorage(this.loginReqData.password, 'password');
+        if(this.loginRes.frontend !== null){
+        this.localDataStore.putLocalDataStorage(this.loginRes.frontend, 'frontend');
+        }
+        if(this.loginRes.service !== null){
+        this.localDataStore.putLocalDataStorage(this.loginRes.service, 'backend');
+        }
+        if(this.loginRes.db !== null){
+        this.localDataStore.putLocalDataStorage(this.loginRes.db, 'db');
+        }
+        if(this.loginRes.repository !== null){
+         this.localDataStore.putLocalDataStorage(this.loginRes.repository.username, 'repository-userName');
+         this.localDataStore.putLocalDataStorage(this.loginRes.repository.password, 'repository-password');
+         this.localDataStore.putLocalDataStorage(this.loginRes.repository.frontEndUrl, 'frontEnd-url');
+         this.localDataStore.putLocalDataStorage(this.loginRes.repository.serviceEndUrl, 'serviceEnd-url');
+        }
+      });
     }
 
     submitData(): void {

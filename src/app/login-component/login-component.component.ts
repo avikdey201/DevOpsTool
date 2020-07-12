@@ -55,6 +55,7 @@ export class LoginComponentComponent implements OnInit {
          this.localDataStore.putLocalDataStorage(this.loginRes.userDetailId, 'userDetailId');
          this.localDataStore.putLocalDataStorage(this.loginRes.userId, 'userId');
          this.localDataStore.putLocalDataStorage(this.loginRes.userName, 'userName');
+         this.localDataStore.putLocalDataStorage(this.loginReqData.password, 'password');
          if(this.loginRes.frontend !== null){
          this.localDataStore.putLocalDataStorage(this.loginRes.frontend, 'frontend');
          }
