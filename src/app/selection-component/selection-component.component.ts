@@ -58,34 +58,39 @@ export class SelectionComponentComponent implements OnInit {
            if(this.localDataStore.getLocalDataStorage('frontend') !== null){
             console.log("Selected User is:",this.loginData.userName);
             this.loginData.userName = this.localDataStore.getLocalDataStorage('userName');
-            if(this.localDataStore.getLocalDataStorage('frontend')){
-            this.selectionForm.controls.frontend.setValue(this.localDataStore.getLocalDataStorage('frontend'));
-            this.selectionForm.controls.frontend.disable();
-            }
-            if(this.localDataStore.getLocalDataStorage('backend')){
-            this.selectionForm.controls.backend.setValue(this.localDataStore.getLocalDataStorage('backend'));
-            this.selectionForm.controls.backend.disable();
-            }
-            if(this.localDataStore.getLocalDataStorage('db')){
-            this.selectionForm.controls.database.setValue(this.localDataStore.getLocalDataStorage('db'));
-            this.selectionForm.controls.database.disable();
-            }
             console.log("Repo details",this.localDataStore.getLocalDataStorage('repository-url'));
             this.repoUserName = this.localDataStore.getLocalDataStorage('repository-userName');
             this.repoPassword = this.localDataStore.getLocalDataStorage('repository-password');
             this.repoFrontEndUrl = this.localDataStore.getLocalDataStorage('frontEnd-url');
             this.repoBackEndUrl = this.localDataStore.getLocalDataStorage('serviceEnd-url');
            }
-          if(this.localDataStore.getLocalDataStorage('submit') !== "null"){
-            this.disableSubmitBtn = true;
-          }
+          //this.localDataStore.putLocalDataStorage(this.loginRes.status, 'submit');
+        this.disableButton();
         
-        //});
+      //  });
        
       }
     
     
   
+  }
+
+  disableButton():void{
+    if(this.localDataStore.getLocalDataStorage('submit') !== "null"){
+      this.disableSubmitBtn = true;
+    }
+    if(this.localDataStore.getLocalDataStorage('frontend')){
+      this.selectionForm.controls.frontend.setValue(this.localDataStore.getLocalDataStorage('frontend'));
+      this.selectionForm.controls.frontend.disable();
+      }
+      if(this.localDataStore.getLocalDataStorage('backend')){
+      this.selectionForm.controls.backend.setValue(this.localDataStore.getLocalDataStorage('backend'));
+      this.selectionForm.controls.backend.disable();
+      }
+      if(this.localDataStore.getLocalDataStorage('db')){
+      this.selectionForm.controls.database.setValue(this.localDataStore.getLocalDataStorage('db'));
+      this.selectionForm.controls.database.disable();
+      }
   }
 
   saveData(): void {
@@ -104,10 +109,15 @@ export class SelectionComponentComponent implements OnInit {
          dialogButtonTexts: ['Close']
         };
         this.dialogService.openDialog(dialogData);
+        this.refreshLocalDataStorage();
    }
     });
 
-    this.loginReqData = new LoginRequestModel();
+    
+    }
+
+    refreshLocalDataStorage():void{
+      this.loginReqData = new LoginRequestModel();
     this.loginReqData.userId = this.localDataStore.getLocalDataStorage('userId'); 
     this.loginReqData.password = this.localDataStore.getLocalDataStorage('password'); 
     this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
@@ -135,9 +145,10 @@ export class SelectionComponentComponent implements OnInit {
          this.localDataStore.putLocalDataStorage(this.loginRes.repository.frontEndUrl, 'frontEnd-url');
          this.localDataStore.putLocalDataStorage(this.loginRes.repository.serviceEndUrl, 'serviceEnd-url');
         }
+        this.localDataStore.putLocalDataStorage(this.loginRes.status, 'submit');
+        this.disableButton();
       });
     }
-
     submitData(): void {
       this.id=this.localDataStore.getLocalDataStorage('userDetailId');
       this.submitSubscription = this.dataProviderService.submitDetails(this.id).subscribe(
