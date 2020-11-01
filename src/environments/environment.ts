@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrls: {
-    local_dev: 'http://localhost:12001'
+    //local_dev: 'http://localhost:12001'
+    local_dev: 'http://172.16.85.42:12001'
   },
   api_endpoints: {
      getUserDetails: '/devops/authentication',
