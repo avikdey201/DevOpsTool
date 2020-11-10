@@ -17,6 +17,7 @@ import { LocalDataStorageService } from './services/localDataStorage.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { LoginDataStorageService } from './services/loginDataStorage.service';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
     NoopAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NgxUiLoaderModule 
   ],
   entryComponents: [DcodeDialogComponent],
   providers: [DialogService, LocalDataStorageService, AuthGuard, LoginDataStorageService, LoginResponseModel],

@@ -11,6 +11,7 @@ import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { LoginDataStorageService } from '../services/loginDataStorage.service';
 import { LoginRequestModel } from 'src/data-model/LoginRequestModel';
 import { Subscription } from 'rxjs';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; 
 
 
 @Component({
@@ -39,7 +40,9 @@ export class SelectionComponentComponent implements OnInit {
      private dataProviderService: DataProviderService,
      private dialogService: DialogService,
      private localDataStore: LocalDataStorageService,
-     private loginDataStore: LoginDataStorageService
+     private loginDataStore: LoginDataStorageService,
+     private ngxService: NgxUiLoaderService
+
     ) { }
     loginRes: LoginResponseModel = new LoginResponseModel();
   ngOnInit() {
@@ -94,11 +97,13 @@ export class SelectionComponentComponent implements OnInit {
   }
 
   saveData(): void {
+    
     this.selectionReqData.userId=this.localDataStore.getLocalDataStorage('userId'); 
     this.selectionReqData.userDetailId=this.localDataStore.getLocalDataStorage('userDetailId'); 
    this.selectionReqData.frontEndLanguage = this.selectionForm.controls.frontend.value;
    this.selectionReqData.backendLanguage = this.selectionForm.controls.backend.value;
    this.selectionReqData.database = this.selectionForm.controls.database.value;
+   this.ngxService.start();
    this.dataProviderService.getDescriptionStatus(this.selectionReqData).subscribe(
     (data: DescriptionResponseModel) => {
        this.descRes = data;
@@ -110,6 +115,7 @@ export class SelectionComponentComponent implements OnInit {
         };
         this.dialogService.openDialog(dialogData);
         this.refreshLocalDataStorage();
+        this.ngxService.stop();
    }
     });
 
