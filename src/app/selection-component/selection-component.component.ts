@@ -115,6 +115,8 @@ export class SelectionComponentComponent implements OnInit {
         };
         this.dialogService.openDialog(dialogData);
         this.refreshLocalDataStorage();
+        this.repoFrontEndUrl = this.descRes.frontEndUrl;
+        this.repoBackEndUrl = this.descRes.serviceUrl;
         this.ngxService.stop();
    }
     });
