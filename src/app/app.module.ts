@@ -18,6 +18,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { LoginDataStorageService } from './services/loginDataStorage.service';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     NoopAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatIconModule,
     NgxUiLoaderModule 
   ],

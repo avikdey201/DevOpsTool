@@ -35,6 +35,8 @@ export class SelectionComponentComponent implements OnInit {
   repoFrontEndUrl: string;
   repoBackEndUrl: string;
   submitSubscription: Subscription;
+  checked: boolean = false;
+  storedStatus: string;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
@@ -125,7 +127,7 @@ export class SelectionComponentComponent implements OnInit {
     }
 
     refreshLocalDataStorage():void{
-      this.loginReqData = new LoginRequestModel();
+    this.loginReqData = new LoginRequestModel();
     this.loginReqData.userId = this.localDataStore.getLocalDataStorage('userId'); 
     this.loginReqData.password = this.localDataStore.getLocalDataStorage('password'); 
     this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
@@ -159,6 +161,7 @@ export class SelectionComponentComponent implements OnInit {
     }
     submitData(): void {
       this.id=this.localDataStore.getLocalDataStorage('userDetailId');
+      
       this.submitSubscription = this.dataProviderService.submitDetails(this.id).subscribe(
         (data: DescriptionResponseModel) => {
            this.submitRes = data;
@@ -167,8 +170,11 @@ export class SelectionComponentComponent implements OnInit {
             const dialogData: DialogData = {dialogType: 'Success',
              dialogTitle: 'Success', dialogContent: 'Data submitted properly',
              dialogButtonTexts: ['Close']
+            
             };
             this.dialogService.openDialog(dialogData);
+            this.localDataStore.putLocalDataStorage(this.submitRes.status, 'urlSubmitStatus');
+            this.storedStatus = this.localDataStore.getLocalDataStorage('urlSubmitStatus');
        } 
         }
       );
