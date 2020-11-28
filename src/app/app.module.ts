@@ -19,6 +19,7 @@ import { LoginDataStorageService } from './services/loginDataStorage.service';
 import { LoginResponseModel } from 'src/data-model/LoginResponseModel';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    NgxUiLoaderModule 
+    NgxUiLoaderModule,
+    FormsModule 
   ],
   entryComponents: [DcodeDialogComponent],
   providers: [DialogService, LocalDataStorageService, AuthGuard, LoginDataStorageService, LoginResponseModel],

@@ -35,8 +35,9 @@ export class SelectionComponentComponent implements OnInit {
   repoFrontEndUrl: string;
   repoBackEndUrl: string;
   submitSubscription: Subscription;
-  checked: boolean = false;
+  disabledAgreement: boolean = true;
   storedStatus: string;
+  checkInStatus: string;
   constructor(private router: Router,
     private fb: FormBuilder,
      private dataProviderService: DataProviderService,
@@ -54,7 +55,7 @@ export class SelectionComponentComponent implements OnInit {
       database: [null, Validators.required]
        });
     this.userName = this.localDataStore.getLocalDataStorage('userName');
-    
+    this.checkInStatus = this.localDataStore.getLocalDataStorage('submit');
     //this.loginData = this.loginDataStore.getLoginDataStorage();
     if (this.localDataStore.getLocalDataStorage('userName')) {
       // this.dataProviderService.getLoginDataWithDetails(this.loginReqData).subscribe(
@@ -156,12 +157,12 @@ export class SelectionComponentComponent implements OnInit {
          this.localDataStore.putLocalDataStorage(this.loginRes.repository.serviceEndUrl, 'serviceEnd-url');
         }
         this.localDataStore.putLocalDataStorage(this.loginRes.status, 'submit');
+        this.checkInStatus = this.loginRes.status;
         this.disableButton();
       });
     }
     submitData(): void {
       this.id=this.localDataStore.getLocalDataStorage('userDetailId');
-      
       this.submitSubscription = this.dataProviderService.submitDetails(this.id).subscribe(
         (data: DescriptionResponseModel) => {
            this.submitRes = data;
@@ -178,9 +179,13 @@ export class SelectionComponentComponent implements OnInit {
        } 
         }
       );
+      this.refreshLocalDataStorage();
 
     }
 
+    changeCheck(event:any){
+          this.disabledAgreement = !event.checked;
+        }
 
     logOut() {
       this.localDataStore.clear();

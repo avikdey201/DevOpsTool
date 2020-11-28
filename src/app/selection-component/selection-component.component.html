@@ -51,9 +51,12 @@
         <br><label class="lblDesign2" for="cars">Repository Details</label>
         <br><label class="lblDesign2" for="cars">FrontEndUrl: {{repoFrontEndUrl}}</label>
         <br><label class="lblDesign2" for="cars">ServiceEndUrl: {{repoBackEndUrl}}</label>
-        <mat-checkbox [(ngModel)]="checked">Use the above URL's for final submit</mat-checkbox>
-        <button [disabled]="!checked" *ngIf=class="finalBtn" mat-button (click)="submitData()" >
+        <mat-checkbox *ngIf="checkInStatus==='C'" (change)="changeCheck($event)">Use the above URL's for final submit</mat-checkbox>
+        <label class ="lblDesign2" *ngIf="checkInStatus==='S'" >Final submission of Code is completed</label>
+        <br><button [disabled]="disabledAgreement" class="finalBtn" mat-button (click)="submitData()">
         Submit</button>
+        <!-- <button  class="finalBtn" mat-button (click)="submitData()" >
+        Submit</button> -->
       </div>
   </div>
    </form>

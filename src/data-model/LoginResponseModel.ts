@@ -7,7 +7,7 @@ export class LoginResponseModel{
    public frontend: string;
    public service :string;
    public db : string;
-   public status : boolean;
+   public status : string;
 
 }
 export class RepoDetails{
