@@ -176,6 +176,7 @@ export class SelectionComponentComponent implements OnInit {
             this.dialogService.openDialog(dialogData);
             this.localDataStore.putLocalDataStorage(this.submitRes.status, 'urlSubmitStatus');
             this.storedStatus = this.localDataStore.getLocalDataStorage('urlSubmitStatus');
+            this.checkInStatus = 'S';
        } 
         }
       );
